@@ -7,8 +7,8 @@
 </head>
 
 <body>
+    <?php require_once __DIR__ . '/../../../utils/helpers.php' ?>
     <div class="container">
-
     <nav>
         <ul>
             <li><a href="?action=listar_fornecedores">Fornecedores</a></li>
@@ -32,12 +32,13 @@
                 <th><input type="checkbox" id="select_all"></th>
             </tr>
             <?php foreach ($produtos as $produto) : ?>
+                
                 <tr>
                     <td><?php echo $produto['id_produto']; ?></td>
                     <td><?php echo $fornecedorMap[$produto['id_fornecedor']]; ?></td>
                     <td><?php echo $produto['nome_produto']; ?></td>
-                    <td><?php echo $produto['valor_produto']; ?></td>
-                    <td><?php echo $produto['peso']; ?></td>
+                    <td><?php echo isset($produto['valor_produto']) ? Helpers::formatarValorPtBr($produto['valor_produto']) : $produto['valor_produto']; ?></td>
+                    <td><?php echo isset($produto['peso']) ? Helpers::formatarPeso($produto['peso']) : $produto['peso']; ?></td>
                     <td><?php echo $produto['quantidade_estoque']; ?></td>
                     <td>
                         <a href="?action=editar_produto&id=<?php echo $produto['id_produto']; ?>">Editar</a>
